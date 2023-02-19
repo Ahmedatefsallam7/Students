@@ -34,7 +34,7 @@ Route::group([
 });
 
 Route::middleware(['jwt.verify'])->controller(ApiUserController::class)->group(function () {
-
+"eee";
     Route::get('users', 'index');
     Route::get('user/{id}', 'getUser');
     Route::post('user/store', 'store');
