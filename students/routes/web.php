@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::controller(UserController::class)->group(function () {
-    "Ahmed";
+    
     Route::get('users', 'index');
     Route::get('user/{id}', 'getUser');
 });
