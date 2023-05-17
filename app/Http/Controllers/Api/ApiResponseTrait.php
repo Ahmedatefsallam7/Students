@@ -12,7 +12,6 @@ trait ApiResponseTrait
                 'data' => $data,
                 'msg' => $msg,
             ];
-
             // return response($result);
             return response()->json($result);
         }

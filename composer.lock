@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "30d6de18e9cbcca6fc932d7c3c69cf24",
+    "content-hash": "9175c0ec55550fa93f3e6a8af39479cd",
     "packages": [
         {
             "name": "brick/math",
@@ -2266,6 +2266,70 @@
                 "source": "https://github.com/nette/utils/tree/v4.0.0"
             },
             "time": "2023-02-02T10:41:53+00:00"
+        },
+        {
+            "name": "newman/laravel-delay",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/edgarsn/laravel-delay.git",
+                "reference": "5074ad4fa9029c59c4666d7587af6db44f54af18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/edgarsn/laravel-delay/zipball/5074ad4fa9029c59c4666d7587af6db44f54af18",
+                "reference": "5074ad4fa9029c59c4666d7587af6db44f54af18",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^8.12|^9.0|^10.0",
+                "illuminate/support": "^8.12|^9.0|^10.0",
+                "nesbot/carbon": "^2.13",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "nunomaduro/larastan": "^1.0|^2.4",
+                "orchestra/testbench": "^6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Newman\\LaravelDelay\\DelayServiceProvider"
+                    ],
+                    "aliases": {
+                        "Delay": "Newman\\LaravelDelay\\Facades\\Delay"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Newman\\LaravelDelay\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Edgars Neimanis",
+                    "email": "neimanis.edgars@gmail.com"
+                }
+            ],
+            "description": "Laravel delay helper package",
+            "keywords": [
+                "delay",
+                "sleep",
+                "timeout"
+            ],
+            "support": {
+                "issues": "https://github.com/edgarsn/laravel-delay/issues",
+                "source": "https://github.com/edgarsn/laravel-delay/tree/1.2.0"
+            },
+            "time": "2023-03-08T17:34:31+00:00"
         },
         {
             "name": "nikic/php-parser",

@@ -40,9 +40,7 @@ class UserController extends Controller
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:6',
-            // 'count_days' => 'required|integer|max:365|min:0'
         ]);
-
 
         if ($validator->fails()) {
             return $this->apiResponse('null', $validator->errors());
@@ -52,7 +50,6 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            // 'count_days' => $request->count_days,
         ]);
         if ($user) {
             return $this->apiResponse(new UserResource($user), 'User Info');
@@ -66,11 +63,9 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,100',
-            'email' => 'required|string|email|max:100|unique:users',
+            'email' => 'required|string|email|max:100',
             'password' => 'required|string|min:6',
-            // 'count_days' => 'required|integer|max:365|min:0'
         ]);
-
 
         if ($validator->fails()) {
             return $this->apiResponse('null', $validator->errors());
@@ -83,24 +78,21 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                // 'count_days' => $request->count_days,
             ]);
             return $this->apiResponse(new UserResource($user),  'User Info Updated Successfully');
         } else {
-            return $this->apiResponse('null', 'Please Try Again !!');
+            return response()->json(['msg' => 'User Not Found To Update !!']);
         }
     }
 
     function destroy($id)
     {
-
         $user = User::find($id);
-
         if ($user) {
             $user->delete();
-            return $this->apiResponse('null', 'User Info Deleted Successfully');
+            return response()->json(['msg' => 'User Info Deleted Successfully']);
         } else {
-            return $this->apiResponse('null', 'User Not Found');
+            return response()->json(['msg' => 'User Not Found']);
         }
     }
 
@@ -109,7 +101,7 @@ class UserController extends Controller
         $user = User::onlyTrashed()->where('id', $id)->restore();
         return ($user) ?
             $this->apiResponse(new UserResource(User::where('id', $id)->first()), 'User Restored Successfully')
-            : $this->apiResponse('null', 'User Not Found to Restore');
+            : response()->json(['msg' => 'User Not Found to Restore']);
     }
 
     function restoreAll()
@@ -117,6 +109,6 @@ class UserController extends Controller
         $users = User::onlyTrashed()->restore();
         return ($users) ?
             $this->apiResponse(UserResource::collection(User::get()), 'All User Restored Successfully')
-            : $this->apiResponse('null', 'There\'s No Deleted Users To Restore');
+            : response()->json(['msg' => 'There\'s No Deleted Users To Restore']);
     }
 }

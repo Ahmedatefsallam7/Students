@@ -15,11 +15,11 @@ return [
 
     'defaults' => [
 
-        // 'guard' => 'web',
-        // 'passwords' => 'users',
-
-        'guard' => 'api',
+        'guard' => 'web',
         'passwords' => 'users',
+
+        // 'guard' => 'api',
+        // 'passwords' => 'users',
     ],
 
     /*

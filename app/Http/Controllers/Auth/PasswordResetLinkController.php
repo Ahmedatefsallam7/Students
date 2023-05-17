@@ -36,16 +36,20 @@ class PasswordResetLinkController extends Controller
         );
 
         // for web view
-        return $status == Password::RESET_LINK_SENT
-            ? back()->with('status', __($status))
-            : back()->withInput($request->only('email'))
-            ->withErrors(['email' => __($status)]);
+        // return $status == Password::RESET_LINK_SENT
+        //     ? back()->with('status', __($status))
+        //     : back()->withInput($request->only('email'))
+        //     ->withErrors(['email' => __($status)]);
 
 
         // for Api response
-        /*return $status == Password::RESET_LINK_SENT
-            ? $this->apiResponse($request->email, 200, ' you will get a message on your email to reset password')
-            : back()->withInput($request->only('email'))
-            ->withErrors(['email' => __($status)]);*/
+        // return $status == Password::RESET_LINK_SENT
+        //     ? $this->apiResponse($request->email, 'you will get a message on your email to reset password')
+        //     : back()->withInput($request->only('email'))
+        //     ->withErrors(['email' => __($status)]);
+
+        return $status == Password::RESET_LINK_SENT
+            ? $this->apiResponse($request->email, 'you will get a message on your email to reset password')
+            : response()->json(['msg' => "Email Not Found"]);
     }
 }

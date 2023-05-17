@@ -5,6 +5,8 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
+        <p style="margin-bottom:5px ">if you not make register click <a style="color: blue;text-decoration-line: underline" href="{{ route('register') }}">here</a></p>
+
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />

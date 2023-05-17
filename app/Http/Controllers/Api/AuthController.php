@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
-use App\Mail\UserMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -33,17 +31,11 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return $this->apiResponse('null', $validator->errors());
         }
-        // return $this->apiResponse(new UserResource(auth()->user()), 'You are logged');
 
-        // check token
-        
         if (!$token = auth()->attempt($validator->validated())) {
-            return $this->apiResponse('null','Unauthorized');
-            // return response()->json(['error' => 'Unauthorized'], 401);
+            return $this->apiResponse('null', 'Unauthorized');
         }
-        // Mail::to('ahmedatefsallam7@gmail.com')->send(new UserMail(auth()->user()->name));
         return $this->createNewToken($token);
-        
     }
 
     public function register(Request $request)
@@ -52,7 +44,6 @@ class AuthController extends Controller
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:8',
-            // 'count_days' => 'required|integer|max:365|min:0'
         ]);
         if ($validator->fails()) {
             return $this->apiResponse('null',  $validator->errors());
@@ -65,16 +56,8 @@ class AuthController extends Controller
         // check token
         if (!$token = auth()->attempt($validator->validated())) {
             return $this->apiResponse('null', 'Unauthorized');
-            // return response()->json(['error' => 'Unauthorized'], 401);
         }
-        // Mail::to($request->email)->send(new UserMail($request->name));
         return $this->createNewToken($token);
-
-        // return $this->apiResponse(new UserResource($user),'User successfully registered');
-        // return response()->json([
-        //     'message' => 'User successfully registered',
-        //     'user' => $user
-        // ], 201);
     }
 
     /**
@@ -99,7 +82,7 @@ class AuthController extends Controller
 
     public function userProfile()
     {
-        return $this->apiResponse(new UserResource(auth()->user()), "User Info");
+        return  $this->apiResponse(new UserResource(auth()->user()), "User Info");
     }
     /**
      * Get the token array structure.
@@ -111,10 +94,11 @@ class AuthController extends Controller
     protected function createNewToken($token)
     {
         return response()->json([
+            'user' => new UserResource(auth()->user()),
             'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => Auth::factory()->getTTL() * 60,
-            'user' => new UserResource(auth()->user())
+            // 'token_type' => 'bearer',
+            // 'expires_in' => Auth::factory()->getTTL() * 60,
+
         ]);
     }
 }
