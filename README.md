@@ -41,33 +41,65 @@ Follow these steps to set up the Students API on your local machine:
 Access NexaNet at http://localhost:8000 in your web browser.
 
 ## API Endpoints
-Create Subject:
 
-Endpoint: /api/subjects/create
-Method: POST
-Parameters: name, description
-List Subjects:
+1.   User Authentication:  
+   -   Register:  
+     - Endpoint: `POST /api/auth/register`
+     - Description: Register a new user.
+   -   Login:  
+     - Endpoint: `POST /api/auth/login`
+     - Description: Log in and get an access token.
+   -   User Profile:  
+     - Endpoint: `GET /api/auth/user-profile`
+     - Description: Get user profile information.
+   -   Refresh Token:  
+     - Endpoint: `POST /api/auth/refresh`
+     - Description: Refresh the access token.
+   -   Logout:  
+     - Endpoint: `POST /api/auth/logout`
+     - Description: Log out and invalidate the access token.
+   -   Reset Password:  
+     - Endpoint: `POST /api/auth/reset-password`
+     - Description: Request to reset user password.
 
-Endpoint: /api/subjects
-Method: GET
-Enroll in Subject:
+2.   Subject Operations:  
+   -   Get All Subjects:  
+     - Endpoint: `GET /api/subjects`
+     - Description: Get a list of all subjects.
+   -   Get Subject by ID:  
+     - Endpoint: `GET /api/subject/{id}`
+     - Description: Get details of a specific subject by ID.
+   -   Update Subject:  
+     - Endpoint: `PUT /api/subject/{id}/update`
+     - Description: Update subject information.
+   -   Delete Subject:  
+     - Endpoint: `DELETE /api/subject/{id}/destroy`
+     - Description: Delete a subject.
+   -   Restore Subject:  
+     - Endpoint: `GET /api/subject/{id}/restore`
+     - Description: Restore a deleted subject.
+   -   Restore All Subjects:  
+     - Endpoint: `GET /api/subject-restoreAll`
+     - Description: Restore all deleted subjects.
 
-Endpoint: /api/subjects/enroll
-Method: POST
-Parameters: subject_id
-View Enrolled Students:
+3.   Joiners:  
+   -   Add Joiner:  
+     - Endpoint: `POST /api/Joiner-store`
+     - Description: Join a subject.
+   -   Get Subjects Joined by User:  
+     - Endpoint: `GET /api/joiner/{id}/joinSubjects`
+     - Description: Get subjects joined by a user.
+   -   Get Users Joined to Subject:  
+     - Endpoint: `GET /api/subject/{id}/joinedBy`
+     - Description: Get users joined to a specific subject.
 
-Endpoint: /api/subjects/{subject_id}/students
-Method: GET
-Generate Attendance Code:
-
-Endpoint: /api/attendance/generate-code
-Method: POST
-Parameters: subject_id
-Verify Attendance Code:
-
-Endpoint: /api/attendance/verify-code
-Method: POST
-Parameters: code
-   
-
+4.   Creators:  
+   -   Add Creator:  
+     - Endpoint: `POST /api/store-subject`
+     - Description: Add a new subject created by the user.
+   -   Get Subjects Created by User:  
+     - Endpoint: `GET /api/creator/{id}/createSubjects`
+     - Description: Get subjects created by a user.
+   -   Get User Created Subject:  
+     - Endpoint: `GET /api/subject/{id}/createdBy`
+     - Description: Get the user who created a specific subject.
